@@ -1,0 +1,32 @@
+@import "../../base.scss";
+
+.comment__form {
+    img{
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        padding-right: 20px;
+    }
+
+    input{
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid $border-color;
+        
+        &:focus{
+            outline: none;
+        }
+    }
+
+    button{
+        background-color: $border-color;
+        color: black;
+        letter-spacing: 0.5px;
+        border-radius: 40px;
+        border: none;
+        &:focus{
+            outline: none;
+            border: none;
+        }
+    }
+}
