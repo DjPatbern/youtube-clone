@@ -22,6 +22,9 @@
             color: white;
             border-radius: 40px;
             letter-spacing: 0.5px;
+            &.btn-gray{
+                background-color: gray;
+            }
 
             &:focus{
                 border: none;

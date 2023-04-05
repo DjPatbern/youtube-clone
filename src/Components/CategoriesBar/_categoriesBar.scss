@@ -1,35 +1,33 @@
 @import "../../base.scss";
 
-.categoriesBar{
-padding: 0.5rem 0;
-font-size: 0.8rem;
+.categoriesBar {
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
 
-display: flex;
-overflow-x: scroll;
+  display: flex;
+  overflow-x: scroll;
 
-&::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 0px;
-}
+  }
 
-scrollbar-width: none;
+  scrollbar-width: none;
 
-span{
+  span {
     margin-right: 1rem;
-    padding: 0.5rem;
+    padding: 0.2rem 0.5rem;
     white-space: nowrap;
     border-radius: 10px;
     cursor: pointer;
     background-color: $border-color;
 
-
-    &:hover{
-        background-color: $border-color;
+    &:hover {
+      background-color: $border-color;
     }
 
-    &.active{
-        background-color: black;
-        color: white;
+    &.active {
+      background-color: black;
+      color: white;
     }
+  }
 }
-}
-

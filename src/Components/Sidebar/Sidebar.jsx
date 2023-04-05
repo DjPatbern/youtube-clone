@@ -1,62 +1,56 @@
-import React from 'react'
-import "./_sidebar.scss"
+import React from "react";
+import "./_sidebar.scss";
 import {
   MdOutlineSubscriptions,
-    MdExitToApp,
-    MdHistory,
-    MdOutlineVideoLibrary,
-    MdHome,
-    MdOutlineWatchLater
-} from "react-icons/md"
-import {BiLike} from "react-icons/bi"
-import { useDispatch } from 'react-redux'
-import { logOut } from '../../redux/actions/auth.action'
+  MdExitToApp,
+  MdHistory,
+  MdOutlineVideoLibrary,
+  MdHome,
+  MdOutlineWatchLater,
+} from "react-icons/md";
+import { BiLike } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/actions/auth.action";
+import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({sidebar, handleSidebarToggle}) => {
+const Sidebar = ({ sidebar, handleSidebarToggle }) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-
-    dispatch(logOut())
-  }
+    dispatch(logOut());
+  };
 
   return (
-    <div className={sidebar? "sidebar open" : "sidebar"} onClick={() => handleSidebarToggle(false)}>
-      <li>
+    <div
+      className={sidebar ? "sidebar open" : "sidebar"}
+      onClick={() => handleSidebarToggle(false)}
+    >
+      <li onClick={() => navigate("/")}>
         <MdHome size={23} />
         <span>Home</span>
       </li>
-
-      
 
       <li>
         <MdOutlineSubscriptions size={23} />
         <span>Subscriptions</span>
       </li>
 
-      
-
       <li>
         <BiLike size={23} />
         <span>Liked Videos</span>
       </li>
-
-      
 
       <li>
         <MdHistory size={23} />
         <span>History</span>
       </li>
 
-      
-
       <li>
         <MdOutlineVideoLibrary size={23} />
         <span>Library</span>
       </li>
-
-      
 
       <li>
         <MdOutlineWatchLater size={23} />
@@ -72,7 +66,7 @@ const Sidebar = ({sidebar, handleSidebarToggle}) => {
 
       <hr />
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

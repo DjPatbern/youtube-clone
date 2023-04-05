@@ -33,7 +33,7 @@ const WatchPage = () => {
         </div>
         {!loading ? <VideoMetadata video={video} videoId={id} /> : "Loading"}
 
-        <Comments />
+        <Comments videoId={id} />
       </Col>
 
       <Col lg={4}>
