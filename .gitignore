@@ -24,4 +24,4 @@ yarn-error.log*
 
 
 # API Links 
-/src/Utils/api-links.js
+.env

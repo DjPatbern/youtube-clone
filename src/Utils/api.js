@@ -1,10 +1,9 @@
 import axios from "axios";
-import { API_KEY, baseURLLink } from "./api-links";
 
 const request = axios.create({
-  baseURL: baseURLLink,
+  baseURL: process.env.REACT_APP_BASEURL,
   params: {
-    key: API_KEY,
+    key: process.env.REACT_APP_API_KEY,
   },
 });
 

@@ -7,7 +7,6 @@ import {
   LOGIN_SUCCESS,
   LOG_OUT,
 } from "../actionTypes";
-import { youtubeAuthApi } from "../../Utils/api-links";
 
 export const login = () => async (dispatch) => {
   try {
@@ -16,7 +15,7 @@ export const login = () => async (dispatch) => {
     });
 
     const res = await signInWithPopup(auth, provider);
-    provider.addScope(youtubeAuthApi);
+    provider.addScope(process.env.REACT_APP_YOUTUBE_API);
     const accessToken = res.user.accessToken;
 
     const profile = {

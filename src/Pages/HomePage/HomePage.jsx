@@ -7,6 +7,7 @@ import {
   getPopularVideos,
   // getVideosByCategory,
 } from "../../redux/actions/videos.action";
+import Loading from "../../Components/Loading/Loadinig";
 // import InfiniteScroll from "react-infinite-scroll-component";
 
 const HomePage = () => {
@@ -16,9 +17,7 @@ const HomePage = () => {
     dispatch(getPopularVideos());
   }, [dispatch]);
 
-  const { videos, activeCategory, loading } = useSelector(
-    (state) => state.homeVideos
-  );
+  const { videos, loading } = useSelector((state) => state.homeVideos);
 
   //   const fetchData = () => {
   //     if (activeCategory == "All") dispatch(getPopularVideos());
@@ -39,13 +38,15 @@ const HomePage = () => {
         }
         className="row"
       > */}
-        {!loading
-          ? videos.map((video) => (
-              <Col lg={4} md={5} key={video.id}>
-                <Videos video={video} />
-              </Col>
-            ))
-          : "Loading"}
+        {!loading ? (
+          videos.map((video) => (
+            <Col lg={4} md={5} key={video.id}>
+              <Videos video={video} />
+            </Col>
+          ))
+        ) : (
+          <Loading />
+        )}
         {/* </InfiniteScroll> */}
       </Row>
     </Container>
