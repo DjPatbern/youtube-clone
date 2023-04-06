@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./_header.scss";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -8,8 +8,15 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Header = ({ handleSidebarToggle }) => {
+  const [input, setInput] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`search/${input}`);
+  };
+
   const { photoURL } = useSelector((state) => state.auth.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className=" header">
       <FaBars
@@ -21,11 +28,16 @@ const Header = ({ handleSidebarToggle }) => {
         src="https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-700x394.png"
         alt=""
         className="header__logo"
-        onClick={()=>navigate("/")}
+        onClick={() => navigate("/")}
       />
 
-      <form>
-        <input type="text" placeholder="Search" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
         <button type="submit">
           {" "}
           <AiOutlineSearch size={22} className="search-icon" />{" "}

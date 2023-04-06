@@ -10,6 +10,7 @@ import {
   getRelatedVideos,
   getVideoById,
 } from "../../redux/actions/videos.action";
+import Loading from "../../Components/Loading/Loadinig";
 
 const WatchPage = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const WatchPage = () => {
             height="100%"
           ></iframe>
         </div>
-        {!loading ? <VideoMetadata video={video} videoId={id} /> : "Loading"}
+        {!loading ? <VideoMetadata video={video} videoId={id} /> : ""}
 
         <Comments videoId={id} />
       </Col>

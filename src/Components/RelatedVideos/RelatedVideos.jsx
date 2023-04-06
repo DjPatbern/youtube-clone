@@ -9,19 +9,20 @@ import { Col, Row } from "react-bootstrap";
 import request from "../../Utils/api";
 import { useNavigate } from "react-router-dom";
 
-const RelatedVideos = ({ video, key }) => {
+const RelatedVideos = ({ video, searchPage }) => {
   const {
     id,
     snippet: {
       channelId,
       channelTitle,
-      description,
       title,
       publishAt,
+      description,
       thumbnails: { medium },
     },
   } = video;
 
+  const isVideo = id.kind === "youtube#video";
   const [views, setViews] = useState(null);
   const [duration, setDuration] = useState(null);
   const [channelIcon, setChannelIcon] = useState(null);
@@ -63,35 +64,43 @@ const RelatedVideos = ({ video, key }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/watch/${id.videoId}`);
+    isVideo
+      ? navigate(`/watch/${id.videoId}`)
+      : navigate(`/channel/${id.channelId}`);
   };
+
+  const thumbnail = !isVideo && "relatedVideos__thumbnail-channel";
 
   return (
     <Row
       className="relatedVideos m-1 py-2 align-items-center"
       onClick={handleClick}
     >
-      <Col xs={6} md={6} className="relatedVideos__left">
+      <Col xs={6} md={searchPage ? 4 : 6} className="relatedVideos__left">
         <LazyLoadImage
           src={medium.url}
           effect="blur"
-          className="relatedVideos__thumbnail"
+          className={`relatedVideos__thumbnail ${thumbnail}`}
           wrapperClassName="relatedVideos__thumbnail-wrapper"
         />
-        <span className="relatedVideos__duration">{_duration}</span>
+        {isVideo && (
+          <span className="relatedVideos__duration">{_duration}</span>
+        )}
       </Col>
 
-      <Col xs={6} md={6} className="relatedVideos__right p-0">
+      <Col xs={6} md={searchPage ? 8 : 6} className="relatedVideos__right p-0">
         <p className="relatedVideos__title mb-1">{title}</p>
-        <div className="relatedVideos__details">
-          <AiFillEye /> {numeral(views).format("0.a")} Views •
-          {moment(publishAt).fromNow()}
-        </div>
+
+        {isVideo && (
+          <div className="relatedVideos__details">
+            <AiFillEye /> {numeral(views).format("0.a")} Views •
+            {moment(publishAt).fromNow()}
+          </div>
+        )}
+
+        {/* {isVideo && <p className="mt-1">{description}</p>} */}
         <div className="relatedVideos__channel d-flex align-items-center my-1">
-          {/* <LazyLoadImage
-          src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png"
-          effect="blur"
-        /> */}
+          {isVideo && <LazyLoadImage src={channelIcon?.url} effect="blur" />}
           <p className="mb-0">{channelTitle}</p>
         </div>
       </Col>

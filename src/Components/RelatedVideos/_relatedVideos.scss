@@ -11,8 +11,12 @@
 
   &__thumbnail {
     width: 100%;
-    height: 90px;
+    // height: 90px;
     border-radius: 10px;
+    &-channel {
+      width: 50%;
+      border-radius: 50%;
+    }
     &-wrapper {
       width: 100%;
     }
