@@ -5,6 +5,7 @@ import { authReducer } from "./reducers/auth.reducer";
 import {
   homeVideoReducer,
   selectedVideoReducer,
+  relatedVideoReducer,
 } from "./reducers/videos.reducer";
 import { channelDetailsReducer } from "./reducers/channel.reducer";
 import { commentsListReducer } from "./reducers/comments.reducer";
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   selectedVideo: selectedVideoReducer,
   channelDetails: channelDetailsReducer,
   commentsList: commentsListReducer,
+  relatedVideo: relatedVideoReducer,
 });
 
 const store = legacy_createStore(
