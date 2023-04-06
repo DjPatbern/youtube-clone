@@ -6,7 +6,10 @@ import RelatedVideos from "../../Components/RelatedVideos/RelatedVideos";
 import Comments from "../../Components/Comments/Comments";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideoById } from "../../redux/actions/videos.action";
+import {
+  getRelatedVideos,
+  getVideoById,
+} from "../../redux/actions/videos.action";
 
 const WatchPage = () => {
   const { id } = useParams();
@@ -14,9 +17,14 @@ const WatchPage = () => {
 
   useEffect(() => {
     dispatch(getVideoById(id));
+    dispatch(getRelatedVideos(id));
   }, [dispatch, id]);
 
   const { video, loading } = useSelector((state) => state.selectedVideo);
+
+  const { videos, loading: relatedVideoLoading } = useSelector(
+    (state) => state.relatedVideo
+  );
 
   return (
     <Row>
@@ -37,9 +45,12 @@ const WatchPage = () => {
       </Col>
 
       <Col lg={4}>
-        {[...Array(10)].map(() => (
-          <RelatedVideos />
-        ))}
+        {!relatedVideoLoading &&
+          videos
+            ?.filter((video) => video.snippet)
+            .map((video) => (
+              <RelatedVideos video={video} key={video.id.videoId} />
+            ))}
       </Col>
     </Row>
   );
